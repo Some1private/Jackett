@@ -21,5 +21,8 @@ WORKDIR /opt/Jackett
 # Expose the default Jackett port
 EXPOSE 9117
 
-# Run Jackett
-CMD ["./Jackett"]
+# Create a log directory
+RUN mkdir -p /opt/Jackett/logs
+
+# Update the CMD to include logging and error handling
+CMD ["/bin/bash", "-c", "while true; do ./Jackett >> /opt/Jackett/logs/jackett.log 2>&1; echo \"Jackett exited with code $? at $(date)\" >> /opt/Jackett/logs/jackett.log; sleep 10; done"]
