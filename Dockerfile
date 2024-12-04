@@ -12,8 +12,9 @@ RUN apt-get update && apt-get install -y \
 
 # Download and install Jackett
 RUN wget -Nc https://github.com/Jackett/Jackett/releases/latest/download/Jackett.Binaries.LinuxAMDx64.tar.gz \
-    && tar -xzf Jackett.Binaries.LinuxAMDx64.tar.gz \
-    && rm -f Jackett.Binaries.LinuxAMDx64.tar.gz
+    && tar -xzf Jackett.Binaries.LinuxAMDx64.tar.gz -C /opt \
+    && rm -f Jackett.Binaries.LinuxAMDx64.tar.gz \
+    && chmod +x /opt/Jackett/jackett
 
 # Set the working directory to Jackett folder
 WORKDIR /opt/Jackett
